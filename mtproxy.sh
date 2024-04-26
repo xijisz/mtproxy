@@ -327,14 +327,9 @@ do_config_mtp() {
         #read -p "(默认版本: ${default_provider}):" input_provider
 		input_provider = 2
         [ -z "${input_provider}" ] && input_provider=${default_provider}
-        expr ${input_provider} + 1 &>/dev/null
+        #expr ${input_provider} + 1 &>/dev/null
         if [ $? -eq 0 ]; then
             if [ ${input_provider} -ge 1 ] && [ ${input_provider} -le 2 ] && [ ${input_provider:0:1} != 0 ]; then
-                echo
-                echo "---------------------------"
-                echo "provider = ${input_provider}"
-                echo "---------------------------"
-                echo
                 break
             fi
         fi
