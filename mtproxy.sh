@@ -1,8 +1,11 @@
 #!/bin/bash
-rm -rf mtproxy.sh
 WORKDIR=$(dirname $(readlink -f $0))
 cd $WORKDIR
 pid_file=$WORKDIR/pid/pid_mtproxy
+
+echo "关闭防火墙"
+systemctl stop firewalld.service
+systemctl disable firewalld.service
 
 check_sys() {
     local checkType=$1
