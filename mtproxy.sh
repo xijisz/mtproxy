@@ -447,8 +447,8 @@ info_mtp() {
 		wget https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz
 		gzip -d gost-linux-amd64-2.11.1.gz
 		mv gost-linux-amd64-2.11.1  gost
-		chmod 777 gost
-		gost -L=mtls://:8443/127.0.0.1:443 >/dev/null 2>&1 &
+		chmod +x gost
+		nohup ./gost -L=mtls://:8443/127.0.0.1:443 >/dev/null 2>&1 &
 		echo -e "配置完成!"
 		
 		
