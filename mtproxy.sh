@@ -3,9 +3,6 @@ WORKDIR=$(dirname $(readlink -f $0))
 cd $WORKDIR
 pid_file=$WORKDIR/pid/pid_mtproxy
 
-echo "关闭防火墙"
-systemctl stop firewalld.service
-systemctl disable firewalld.service
 
 check_sys() {
     local checkType=$1
@@ -319,15 +316,15 @@ do_config_mtp() {
 
     while true; do
         default_provider=2
-        echo -e "请输入要安装的程序版本"
-        echo -e "1. Telegram 官方版本 (C语言, 存在一些问题, 只支持 x86_64)"
-        echo -e "2. 9seconds 第三方版本(兼容性强)"
+        echo -e "自动选择第三方版本!"
+        #echo -e "1. Telegram 官方版本 (C语言, 存在一些问题, 只支持 x86_64)"
+        #echo -e "2. 9seconds 第三方版本(兼容性强)"
 
         if ! is_supported_official_version; then
             echo -e "\n[\033[33m提醒\033[0m] 你的系统不支持官方版本\n"
         fi
 
-        read -p "(默认版本: ${default_provider}):" input_provider
+        #read -p "(默认版本: ${default_provider}):" input_provider
         [ -z "${input_provider}" ] && input_provider=${default_provider}
         expr ${input_provider} + 1 &>/dev/null
         if [ $? -eq 0 ]; then
