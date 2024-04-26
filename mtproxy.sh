@@ -1,4 +1,5 @@
 #!/bin/bash
+rm -rf mtproxy.sh
 WORKDIR=$(dirname $(readlink -f $0))
 cd $WORKDIR
 pid_file=$WORKDIR/pid/pid_mtproxy
@@ -314,7 +315,7 @@ do_config_mtp() {
     cd $WORKDIR
 
     while true; do
-        default_provider=1
+        default_provider=2
         echo -e "请输入要安装的程序版本"
         echo -e "1. Telegram 官方版本 (C语言, 存在一些问题, 只支持 x86_64)"
         echo -e "2. 9seconds 第三方版本(兼容性强)"
