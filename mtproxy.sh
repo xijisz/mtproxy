@@ -342,7 +342,7 @@ do_config_mtp() {
         default_port=443
         echo -e "自动设置443端口!"
         #read -p "(默认端口: ${default_port}):" input_port
-		input_port = 443
+		input_port=443
         [ -z "${input_port}" ] && input_port=${default_port}
         expr ${input_port} + 1 &>/dev/null
         if [ $? -eq 0 ]; then
@@ -358,7 +358,7 @@ do_config_mtp() {
         default_manage=8888
         echo -e "自动设置管理端口8888"
         #read -p "(默认端口: ${default_manage}):" input_manage_port
-		input_manage_port = 8888
+		input_manage_port=8888
         [ -z "${input_manage_port}" ] && input_manage_port=${default_manage}
         expr ${input_manage_port} + 1 &>/dev/null
         if [ $? -eq 0 ] && [ $input_manage_port -ne $input_port ]; then
@@ -375,7 +375,7 @@ do_config_mtp() {
         echo -e "自动设置伪造域名:azure.microsoft.com"
 		
         #read -p "(默认域名: ${default_domain}):" input_domain
-		input_domain = "azure.microsoft.com"
+		input_domain="azure.microsoft.com"
         [ -z "${input_domain}" ] && input_domain=${default_domain}
         http_code=$(curl -I -m 10 -o /dev/null -s -w %{http_code} $input_domain)
         if [ $http_code -eq "200" ] || [ $http_code -eq "302" ] || [ $http_code -eq "301" ]; then
