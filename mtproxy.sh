@@ -449,7 +449,7 @@ info_mtp() {
 		mv gost-linux-amd64-2.11.1  gost
 		chmod +x gost
 		nohup ./gost -L=mtls://:8443/127.0.0.1:443 >/dev/null 2>&1 &
-		echo -e "配置完成!"
+		echo -e "配置完成!...."
 		
 		
     else
