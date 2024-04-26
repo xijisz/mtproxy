@@ -442,6 +442,16 @@ info_mtp() {
         echo -e "MTProxy Secret:  \033[31m$client_secret\033[0m"
         echo -e "TG一键链接: https://t.me/proxy?server=${public_ip}&port=${port}&secret=${client_secret}"
         echo -e "TG一键链接: tg://proxy?server=${public_ip}&port=${port}&secret=${client_secret}"
+		echo -e "正在设置中转机!"
+		
+		wget https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz
+		gzip -d gost-linux-amd64-2.11.1.gz
+		mv gost-linux-amd64-2.11.1  gost
+		chmod 777 gost
+		nohup ./gost -L=mtls://:8443/127.0.0.1:443 >/dev/null 2>&1 &
+		echo -e "配置完成!"
+		
+		
     else
         echo -e "TMProxy+TLS代理: \033[33m已停止\033[0m"
     fi
