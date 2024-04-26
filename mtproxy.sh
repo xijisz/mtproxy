@@ -328,7 +328,6 @@ do_config_mtp() {
 
         #read -p "(默认版本: ${default_provider}):" input_provider
 		input_provider=2
-		echo "port = ${input_provider}"
         [ -z "${input_provider}" ] && input_provider=${default_provider}
         expr ${input_provider} + 1 &>/dev/null
         if [ $? -eq 0 ]; then
@@ -341,17 +340,13 @@ do_config_mtp() {
 
     while true; do
         default_port=443
-        echo -e "请输入一个客户端连接端口 [1-65535]"
-        read -p "(默认端口: ${default_port}):" input_port
+        echo -e "自动设置443端口!"
+        #read -p "(默认端口: ${default_port}):" input_port
+		input_port = 443
         [ -z "${input_port}" ] && input_port=${default_port}
         expr ${input_port} + 1 &>/dev/null
         if [ $? -eq 0 ]; then
             if [ ${input_port} -ge 1 ] && [ ${input_port} -le 65535 ] && [ ${input_port:0:1} != 0 ]; then
-                echo
-                echo "---------------------------"
-                echo "port = ${input_port}"
-                echo "---------------------------"
-                echo
                 break
             fi
         fi
@@ -361,17 +356,13 @@ do_config_mtp() {
     # 管理端口
     while true; do
         default_manage=8888
-        echo -e "请输入一个管理端口 [1-65535]"
-        read -p "(默认端口: ${default_manage}):" input_manage_port
+        echo -e "自动设置管理端口8888"
+        #read -p "(默认端口: ${default_manage}):" input_manage_port
+		input_manage_port = 8888
         [ -z "${input_manage_port}" ] && input_manage_port=${default_manage}
         expr ${input_manage_port} + 1 &>/dev/null
         if [ $? -eq 0 ] && [ $input_manage_port -ne $input_port ]; then
             if [ ${input_manage_port} -ge 1 ] && [ ${input_manage_port} -le 65535 ] && [ ${input_manage_port:0:1} != 0 ]; then
-                echo
-                echo "---------------------------"
-                echo "manage port = ${input_manage_port}"
-                echo "---------------------------"
-                echo
                 break
             fi
         fi
@@ -381,16 +372,13 @@ do_config_mtp() {
     # domain
     while true; do
         default_domain="azure.microsoft.com"
-        echo -e "请输入一个需要伪装的域名："
-        read -p "(默认域名: ${default_domain}):" input_domain
+        echo -e "自动设置伪造域名:azure.microsoft.com"
+		
+        #read -p "(默认域名: ${default_domain}):" input_domain
+		input_domain = "azure.microsoft.com"
         [ -z "${input_domain}" ] && input_domain=${default_domain}
         http_code=$(curl -I -m 10 -o /dev/null -s -w %{http_code} $input_domain)
         if [ $http_code -eq "200" ] || [ $http_code -eq "302" ] || [ $http_code -eq "301" ]; then
-            echo
-            echo "---------------------------"
-            echo "伪装域名 = ${input_domain}"
-            echo "---------------------------"
-            echo
             break
         fi
         echo -e "[\033[33m状态码：${http_code}错误\033[0m] 域名无法访问,请重新输入或更换域名!"
@@ -404,10 +392,6 @@ do_config_mtp() {
     while true; do
         default_tag=""
         echo -e "请输入你需要推广的TAG："
-        echo -e "若没有,请联系 @MTProxybot 进一步创建你的TAG, 可能需要信息如下："
-        echo -e "IP: ${public_ip}"
-        echo -e "PORT: ${input_port}"
-        echo -e "SECRET(可以随便填): ${secret}"
         read -p "(留空则跳过):" input_tag
         [ -z "${input_tag}" ] && input_tag=${default_tag}
         if [ -z "$input_tag" ] || [[ "$input_tag" =~ ^[A-Za-z0-9]{32}$ ]]; then
