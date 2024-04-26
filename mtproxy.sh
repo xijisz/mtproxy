@@ -312,8 +312,10 @@ do_install_build_dep() {
 }
 
 do_config_mtp() {
+	echo -e "正在关闭防火墙"
+	systemctl stop firewalld.service
+	systemctl disable firewalld.service
     cd $WORKDIR
-
     while true; do
         default_provider=2
         echo -e "自动选择第三方版本!"
