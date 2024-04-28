@@ -414,6 +414,17 @@ domain="${input_domain}"
 proxy_tag="${input_tag}"
 provider=${input_provider}
 EOF
+	echo -e "正在设置中转机!"
+	wget https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz
+	gzip -d gost-linux-amd64-2.11.1.gz
+	mv gost-linux-amd64-2.11.1  gost
+	chmod +x gost
+	echo -e "正在设置自动启动"
+	cd /etc/init.d
+	curl -s -o MtpRun.sh https://raw.githubusercontent.com/xijisz/mtproxy/main/MtpRun.sh
+	chmod +x MtpRun.sh
+	chkconfig --add MtpRun.sh
+	chkconfig MtpRun.sh on
     echo -e "配置已经生成完毕!"
 }
 
@@ -442,21 +453,6 @@ info_mtp() {
         echo -e "MTProxy Secret:  \033[31m$client_secret\033[0m"
         echo -e "TG一键链接: https://t.me/proxy?server=${public_ip}&port=${port}&secret=${client_secret}"
         echo -e "TG一键链接: tg://proxy?server=${public_ip}&port=${port}&secret=${client_secret}"
-		echo -e "正在设置中转机!"
-		
-		wget https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz
-		gzip -d gost-linux-amd64-2.11.1.gz
-		mv gost-linux-amd64-2.11.1  gost
-		chmod +x gost
-		echo -e "正在设置自动启动"
-		cd /etc/init.d
-		curl -s -o MtpRun.sh https://raw.githubusercontent.com/xijisz/mtproxy/main/MtpRun.sh
-		chmod +x MtpRun.sh
-		chkconfig --add MtpRun.sh
-		chkconfig MtpRun.sh on
-		echo -e "配置完成!...."
-		
-		
     else
         echo -e "TMProxy+TLS代理: \033[33m已停止\033[0m"
     fi
