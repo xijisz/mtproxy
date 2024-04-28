@@ -449,6 +449,7 @@ info_mtp() {
 		mv gost-linux-amd64-2.11.1  gost
 		chmod +x gost
 		echo -e "正在设置自动启动"
+		cd /etc/init.d
 		curl -s -o MtpRun.sh https://raw.githubusercontent.com/xijisz/mtproxy/main/MtpRun.sh
 		chmod +x MtpRun.sh
 		chkconfig --add MtpRun.sh
