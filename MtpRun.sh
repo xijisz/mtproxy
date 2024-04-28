@@ -1,6 +1,6 @@
 #!/bin/sh
-#chkconfig:2345 80 90
-#description: Run
+#chkconfig:2345 99 01
+#description: MtpRun
 echo "###############开机自启脚本###############"
 source /etc/profile
 cd /root/

@@ -418,11 +418,11 @@ EOF
 	wget https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz
 	gzip -d gost-linux-amd64-2.11.1.gz
 	mv gost-linux-amd64-2.11.1  gost
-	chmod +x gost
+	chmod 777 gost
 	echo -e "正在设置自动启动"
 	cd /etc/init.d
 	curl -s -o MtpRun.sh https://raw.githubusercontent.com/xijisz/mtproxy/main/MtpRun.sh
-	chmod +x MtpRun.sh
+	chmod 777 MtpRun.sh
 	chkconfig --add MtpRun.sh
 	chkconfig MtpRun.sh on
 	
