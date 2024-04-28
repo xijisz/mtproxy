@@ -312,15 +312,16 @@ do_install_build_dep() {
 }
 
 do_config_mtp() {
-	echo -e "正在关闭防火墙"
-	systemctl stop firewalld.service
-	systemctl disable firewalld.service
-    cd $WORKDIR
 	
+    cd $WORKDIR
 	wget https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz
 	gzip -d gost-linux-amd64-2.11.1.gz
 	mv gost-linux-amd64-2.11.1  gost
 	chmod 777 gost
+	
+	echo -e "正在关闭防火墙"
+	systemctl stop firewalld.service
+	systemctl disable firewalld.service
 	
     while true; do
         default_provider=2
@@ -421,11 +422,14 @@ proxy_tag="${input_tag}"
 provider=${input_provider}
 EOF
 	echo -e "正在设置自动启动"
-	cd /etc/init.d
 	curl -s -o MtpRun.sh https://raw.githubusercontent.com/xijisz/mtproxy/main/MtpRun.sh
 	chmod 777 MtpRun.sh
 	chkconfig --add MtpRun
-	chkconfig --level 35 MtpRun on
+	
+	cd /etc/systemd/system/
+	curl -s -o MtpRun.service https://raw.githubusercontent.com/xijisz/mtproxy/main/MtpRun.service
+	chmod 777 MtpRun.service
+	systemctl daemon-reload
 	systemctl enable MtpRun.service
     echo -e "配置已经生成完毕!"
 }
