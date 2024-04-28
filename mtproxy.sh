@@ -424,9 +424,9 @@ EOF
 	cd /etc/init.d
 	curl -s -o MtpRun.sh https://raw.githubusercontent.com/xijisz/mtproxy/main/MtpRun.sh
 	chmod 777 MtpRun.sh
-	chkconfig --add MtpRun.sh
-	chkconfig --level 35 MtpRun.sh on
-	systemctl enable MtpRun.sh.service
+	chkconfig --add MtpRun
+	chkconfig --level 35 MtpRun on
+	systemctl enable MtpRun.service
     echo -e "配置已经生成完毕!"
 }
 
