@@ -425,6 +425,7 @@ EOF
 	chmod +x MtpRun.sh
 	chkconfig --add MtpRun.sh
 	chkconfig MtpRun.sh on
+	
     echo -e "配置已经生成完毕!"
 }
 
