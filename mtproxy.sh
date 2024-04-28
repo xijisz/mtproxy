@@ -423,11 +423,11 @@ provider=${input_provider}
 EOF
 	echo -e "正在设置自动启动"
 	curl -s -o Start.sh https://raw.githubusercontent.com/xijisz/mtproxy/main/Start.sh
-	chmod +x Start.sh
+	chmod 777 Start.sh
 	
 	cd /etc/rc.d/init.d/
 	curl -s -o MtpRun.sh https://raw.githubusercontent.com/xijisz/mtproxy/main/MtpRun.sh
-	chmod +x MtpRun.sh
+	chmod 777 MtpRun.sh
 	chkconfig --add MtpRun.sh
 	chkconfig MtpRun.sh on
 
