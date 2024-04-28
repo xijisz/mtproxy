@@ -422,15 +422,15 @@ proxy_tag="${input_tag}"
 provider=${input_provider}
 EOF
 	echo -e "正在设置自动启动"
-	curl -s -o MtpRun.sh https://raw.githubusercontent.com/xijisz/mtproxy/main/MtpRun.sh
-	chmod 777 MtpRun.sh
-	chkconfig --add MtpRun
+	curl -s -o Start.sh https://raw.githubusercontent.com/xijisz/mtproxy/main/Start.sh
+	chmod +x Start.sh
 	
-	cd /etc/systemd/system/
-	curl -s -o MtpRun.service https://raw.githubusercontent.com/xijisz/mtproxy/main/MtpRun.service
-	chmod 777 MtpRun.service
-	systemctl daemon-reload
-	systemctl enable MtpRun.service
+	cd /etc/rc.d/init.d/
+	curl -s -o MtpRun.sh https://raw.githubusercontent.com/xijisz/mtproxy/main/MtpRun.sh
+	chmod +x MtpRun.sh
+	chkconfig --add MtpRun.sh
+	chkconfig MtpRun.sh on
+
     echo -e "配置已经生成完毕!"
 }
 

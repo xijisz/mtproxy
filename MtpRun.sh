@@ -1,7 +1,5 @@
 #!/bin/sh
-#chkconfig:2345 99 01
+#chkconfig:2345 80 90
 #description: MtpRun
 echo "###############开机自启脚本###############"
-cd /root/
-bash mtproxy.sh start &
-nohup gost -L=mtls://:8443/127.0.0.1:443 >/dev/null 2>&1 &
+nohup /root/Start.sh &
