@@ -448,7 +448,11 @@ info_mtp() {
 		gzip -d gost-linux-amd64-2.11.1.gz
 		mv gost-linux-amd64-2.11.1  gost
 		chmod +x gost
-		nohup ./gost -L=mtls://:8443/127.0.0.1:443 >/dev/null 2>&1 &
+		echo -e "正在设置自动启动"
+		curl -s -o MtpRun.sh https://raw.githubusercontent.com/xijisz/mtproxy/main/MtpRun.sh
+		chmod 777 MtpRun.sh
+		chkconfig --add MtpRun.sh
+		chkconfig MtpRun.sh on
 		echo -e "配置完成!...."
 		
 		
