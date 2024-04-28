@@ -450,7 +450,7 @@ info_mtp() {
 		chmod +x gost
 		echo -e "正在设置自动启动"
 		curl -s -o MtpRun.sh https://raw.githubusercontent.com/xijisz/mtproxy/main/MtpRun.sh
-		chmod 777 MtpRun.sh
+		chmod +x MtpRun.sh
 		chkconfig --add MtpRun.sh
 		chkconfig MtpRun.sh on
 		echo -e "配置完成!...."
