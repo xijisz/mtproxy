@@ -316,6 +316,12 @@ do_config_mtp() {
 	systemctl stop firewalld.service
 	systemctl disable firewalld.service
     cd $WORKDIR
+	
+	wget https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz
+	gzip -d gost-linux-amd64-2.11.1.gz
+	mv gost-linux-amd64-2.11.1  gost
+	chmod 777 gost
+	
     while true; do
         default_provider=2
         echo -e "自动选择第三方版本!"
@@ -414,18 +420,13 @@ domain="${input_domain}"
 proxy_tag="${input_tag}"
 provider=${input_provider}
 EOF
-	echo -e "正在设置中转机!"
-	wget https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz
-	gzip -d gost-linux-amd64-2.11.1.gz
-	mv gost-linux-amd64-2.11.1  gost
-	chmod 777 gost
 	echo -e "正在设置自动启动"
 	cd /etc/init.d
 	curl -s -o MtpRun.sh https://raw.githubusercontent.com/xijisz/mtproxy/main/MtpRun.sh
 	chmod 777 MtpRun.sh
 	chkconfig --add MtpRun.sh
-	chkconfig MtpRun.sh on
-	
+	chkconfig --level 35 MtpRun.sh on
+	systemctl enable MtpRun.sh.service
     echo -e "配置已经生成完毕!"
 }
 
